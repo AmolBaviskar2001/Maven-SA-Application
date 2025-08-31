@@ -3,54 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vehicle Configurator</title>
+  <title>Build Your Car</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f0f2f5;
       margin: 0;
-      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f4;
+      color: #222;
     }
 
     header {
-      background: #222;
-      color: white;
+      background: #000;
+      color: #fff;
       padding: 20px;
       text-align: center;
       font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 2px;
     }
 
-    .container {
+    .main {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       padding: 30px;
     }
 
-    .config-panel {
-      flex: 1;
-      min-width: 300px;
-      max-width: 400px;
-      padding: 20px;
+    .car-display {
+      width: 80%;
+      max-width: 900px;
       background: white;
-      margin: 10px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      padding: 20px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .car-display img {
+      width: 100%;
+      border-radius: 10px;
+      transition: 0.4s ease;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      width: 90%;
+    }
+
+    .option-card {
+      background: white;
+      padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      flex: 1;
+      min-width: 250px;
     }
 
-    .config-panel h2 {
+    .option-card h3 {
       margin-bottom: 15px;
-      color: #333;
-    }
-
-    .option-group {
-      margin-bottom: 20px;
-    }
-
-    .option-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
     }
 
     select, input[type="color"] {
@@ -61,110 +77,86 @@
       font-size: 14px;
     }
 
-    .preview-panel {
-      flex: 1;
-      min-width: 300px;
-      max-width: 500px;
-      padding: 20px;
-      background: white;
-      margin: 10px;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-
-    .car-preview {
-      width: 100%;
-      height: 200px;
-      background: gray;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
+    footer {
+      background: #000;
       color: white;
-      transition: background 0.5s;
-    }
-
-    .summary {
-      font-size: 16px;
-      text-align: left;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
-  <header>🚙 Custom Vehicle Configurator</header>
+<header>🚙 Build Your Own Car</header>
 
-  <div class="container">
-    <!-- Config Panel -->
-    <div class="config-panel">
-      <h2>Choose Your Options</h2>
-
-      <div class="option-group">
-        <label for="color">Car Color:</label>
-        <input type="color" id="color" value="#4a90e2">
-      </div>
-
-      <div class="option-group">
-        <label for="wheels">Wheel Type:</label>
-        <select id="wheels">
-          <option value="Standard">Standard</option>
-          <option value="Sport">Sport</option>
-          <option value="Alloy">Alloy</option>
-        </select>
-      </div>
-
-      <div class="option-group">
-        <label for="interior">Interior:</label>
-        <select id="interior">
-          <option value="Fabric">Fabric</option>
-          <option value="Leather">Leather</option>
-          <option value="Premium Leather">Premium Leather</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- Preview Panel -->
-    <div class="preview-panel">
-      <h2>Live Preview</h2>
-      <div class="car-preview" id="carPreview">Your Car</div>
-      <div class="summary" id="summary">
-        <p><b>Color:</b> Blue</p>
-        <p><b>Wheels:</b> Standard</p>
-        <p><b>Interior:</b> Fabric</p>
-      </div>
-    </div>
+<div class="main">
+  <!-- Car Preview -->
+  <div class="car-display">
+    <img id="carImage" src="https://i.imgur.com/2Qe9s1q.png" alt="Car Preview">
+    <h2 id="carTitle">Custom Car: Blue, Standard Wheels, Fabric Interior</h2>
   </div>
 
-  <script>
-    const colorPicker = document.getElementById("color");
-    const wheelsSelect = document.getElementById("wheels");
-    const interiorSelect = document.getElementById("interior");
-    const carPreview = document.getElementById("carPreview");
-    const summary = document.getElementById("summary");
+  <!-- Options -->
+  <div class="options">
+    <div class="option-card">
+      <h3>🎨 Exterior Color</h3>
+      <input type="color" id="colorPicker" value="#1e90ff">
+    </div>
 
-    function updatePreview() {
-      const color = colorPicker.value;
-      const wheels = wheelsSelect.value;
-      const interior = interiorSelect.value;
+    <div class="option-card">
+      <h3>🛞 Wheel Style</h3>
+      <select id="wheels">
+        <option value="standard">Standard</option>
+        <option value="sport">Sport</option>
+        <option value="alloy">Alloy</option>
+      </select>
+    </div>
 
-      carPreview.style.background = color;
+    <div class="option-card">
+      <h3>🛋 Interior</h3>
+      <select id="interior">
+        <option value="fabric">Fabric</option>
+        <option value="leather">Leather</option>
+        <option value="premium">Premium Leather</option>
+      </select>
+    </div>
+  </div>
+</div>
 
-      summary.innerHTML = `
-        <p><b>Color:</b> ${color}</p>
-        <p><b>Wheels:</b> ${wheels}</p>
-        <p><b>Interior:</b> ${interior}</p>
-      `;
+<footer>© 2025 Custom Motors | Design Your Dream Ride</footer>
+
+<script>
+  const colorPicker = document.getElementById("colorPicker");
+  const wheelsSelect = document.getElementById("wheels");
+  const interiorSelect = document.getElementById("interior");
+  const carTitle = document.getElementById("carTitle");
+  const carImage = document.getElementById("carImage");
+
+  function updateCar() {
+    const color = colorPicker.value;
+    const wheels = wheelsSelect.value;
+    const interior = interiorSelect.value;
+
+    // Simple dynamic title update
+    carTitle.textContent = `Custom Car: ${color}, ${wheels} wheels, ${interior} interior`;
+
+    // Fake "change car image" logic
+    if (wheels === "sport") {
+      carImage.src = "https://i.imgur.com/LlKpq3x.png";
+    } else if (wheels === "alloy") {
+      carImage.src = "https://i.imgur.com/dg2HCGU.png";
+    } else {
+      carImage.src = "https://i.imgur.com/2Qe9s1q.png";
     }
+  }
 
-    colorPicker.addEventListener("input", updatePreview);
-    wheelsSelect.addEventListener("change", updatePreview);
-    interiorSelect.addEventListener("change", updatePreview);
+  colorPicker.addEventListener("input", updateCar);
+  wheelsSelect.addEventListener("change", updateCar);
+  interiorSelect.addEventListener("change", updateCar);
 
-    updatePreview(); // initial load
-  </script>
+  updateCar(); // Initial
+</script>
 
 </body>
 </html>
